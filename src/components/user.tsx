@@ -4,7 +4,7 @@ import "./user.css";
 export interface UserInterface {
     name: string;
     email: string;
-    age?: number; //optional
+    age?: string; //optional
     job: string;
   }
 
