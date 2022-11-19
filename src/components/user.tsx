@@ -1,30 +1,50 @@
 import React from 'react'
 import "./user.css";
 
-interface UserInterface {
+export interface UserInterface {
     name: string;
     email: string;
-    age: number;
+    age?: number; //optional
     job: string;
   }
 
 interface UserInputInt {
     user: UserInterface;
     i: number;
-    deleteHandler: Function;
+    deleteHandler: (i: number) => void;
+    // deleteHandler: () => string;
 }
 
-const User = ({ user, i, deleteHandler}: UserInputInt) => {
+const User: React.FC<UserInputInt> = ({ user, i, deleteHandler}) => {
   return (
     <div key={i} className="card">
         <div className="row">
-            <h2>{user.name}</h2>
-            <h2>{user.email}</h2>
-            <h2>{user.age}</h2>
-            <h2>{user.job}</h2>
-            <button onClick={() => deleteHandler(i)}>Delete user</button>
+            <h2>Name: </h2>
+            <p>{user.name}</p>
         </div>
         <hr />
+
+        <div className='row'>
+          <h2>Email: </h2>
+          <p>{user.email}</p>
+        </div>
+        <hr />
+
+        {user.age && (
+          <>
+            <div className='row'>
+              <h2>Age: </h2>
+              <p>{user.age}</p>
+            </div>
+            <hr />
+          </>
+        )}
+
+        <div className='row'>
+          <h2>Job: </h2>
+          <p>{user.job}</p>
+        </div>
+        <button onClick={() => deleteHandler(i)}>Delete user</button>
     </div>
   )
 }

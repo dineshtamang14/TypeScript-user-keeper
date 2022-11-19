@@ -1,15 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
-import User from './components/user';
+import User, { UserInterface } from './components/user';
 
 const App: React.FC = () => {
-
-  interface UserInterface {
-    name: string;
-    email: string;
-    age: number;
-    job: string;
-  }
 
   interface AllUsersInterface {
     currentUser: UserInterface;
@@ -72,22 +65,24 @@ const App: React.FC = () => {
   return (
     <div className="container">
       <h1>TypeScript</h1>
-      <form onSubmit={submitForm}>
+      <form onSubmit={submitForm} className="card">
         <label htmlFor="userName">Name:</label>
         <input type="text" name="name" id="userName" value={userState.currentUser.name}
           onChange={onChangeHandler}
+          autoCapitalize="true"
+          required
         />
 
         <label htmlFor="userEmail">Email:</label>
-        <input type="email" name="email" id="userEmail" value={userState.currentUser.email} onChange={onChangeHandler} />
+        <input type="email" name="email" id="userEmail" value={userState.currentUser.email} onChange={onChangeHandler} required />
 
         <label htmlFor="userAge">Age:</label>
         <input type="number" name="age" id="userAge" value={userState.currentUser.age} onChange={onChangeHandler} />
 
         <label htmlFor="userJob">Job:</label>
-        <input type="text" name="job" id="userJob" value={userState.currentUser.job} onChange={onChangeHandler} />
+        <input type="text" name="job" id="userJob" value={userState.currentUser.job} onChange={onChangeHandler} required autoCapitalize='true' />
 
-        <button type="submit">Add user</button>
+        <button type="submit" className='submitBtn'>Add user</button>
       </form>
 
       {userState.allUsers.map((user, i) => (
