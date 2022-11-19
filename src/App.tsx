@@ -28,7 +28,7 @@ const App: React.FC = () => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
 
-    console.log(userState.currentUser);
+    // console.log(userState.currentUser);
 
     setUsersState({
       ...userState,
@@ -55,6 +55,30 @@ const App: React.FC = () => {
     })
   }
 
+  console.log(userState);
+
+  const deleteHandler = (index: number): void => {
+    const filterUsers = userState.allUsers.filter((user, i)=> {
+      return index !== i;
+    })
+
+    setUsersState({
+      ...userState,
+      allUsers: filterUsers
+    })
+  }
+
+  const allUsers = userState.allUsers.map((user, i) => (
+    <div key={i}>
+      <h2>{user.name}</h2>
+      <h2>{user.email}</h2>
+      <h2>{user.age}</h2>
+      <h2>{user.job}</h2>
+
+      <button onClick={() => deleteHandler(i)}>Delete user</button>
+    </div>
+  ))
+
   return (
     <div className="container">
       <h1>TypeScript</h1>
@@ -75,6 +99,8 @@ const App: React.FC = () => {
 
         <button type="submit">Add user</button>
       </form>
+
+      {allUsers}
     </div>
   );
 }
