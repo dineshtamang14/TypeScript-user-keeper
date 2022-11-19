@@ -34,7 +34,7 @@ const App: React.FC = () => {
       ...userState,
       currentUser: {
         ...userState.currentUser,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.name === "age" ? Number(e.target.value) : e.target.value
       }
     })
   }
@@ -45,7 +45,7 @@ const App: React.FC = () => {
       currentUser: {
         name: "",
         email: "",
-        age: 0,
+        age: NaN,
         job: "",
       },
       allUsers: [
