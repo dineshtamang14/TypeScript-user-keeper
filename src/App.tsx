@@ -4,24 +4,34 @@ import './App.css';
 const App: React.FC = () => {
 
   interface UserInterface {
-    name: string,
-    email: string,
-    age: number,
-    job: string
+    name: string;
+    email: string;
+    age: number;
+    job: string;
   }
 
-  const [userState, setUsersState] = useState<{ currentUser: UserInterface }>({
+  interface AllUsersInterface {
+    currentUser: UserInterface;
+    allUsers: Array<UserInterface>;
+  }
+
+  const [userState, setUsersState] = useState<AllUsersInterface>({
     currentUser: { 
       name: "",
       email: "",
       age: 0,
       job: ""
-    }
+    },
+    allUsers: []
   })
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
+
+    console.log(userState.currentUser);
+
     setUsersState({
+      ...userState,
       currentUser: {
         ...userState.currentUser,
         [e.target.name]: e.target.value
@@ -31,6 +41,18 @@ const App: React.FC = () => {
 
   const submitForm = (e: React.SyntheticEvent): void => {
     e.preventDefault();
+    setUsersState({
+      currentUser: {
+        name: "",
+        email: "",
+        age: 0,
+        job: "",
+      },
+      allUsers: [
+        ...userState.allUsers,
+        userState.currentUser
+      ]
+    })
   }
 
   return (
