@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
+import User from './components/user';
 
 const App: React.FC = () => {
 
@@ -68,17 +69,6 @@ const App: React.FC = () => {
     })
   }
 
-  const allUsers = userState.allUsers.map((user, i) => (
-    <div key={i}>
-      <h2>{user.name}</h2>
-      <h2>{user.email}</h2>
-      <h2>{user.age}</h2>
-      <h2>{user.job}</h2>
-
-      <button onClick={() => deleteHandler(i)}>Delete user</button>
-    </div>
-  ))
-
   return (
     <div className="container">
       <h1>TypeScript</h1>
@@ -100,7 +90,9 @@ const App: React.FC = () => {
         <button type="submit">Add user</button>
       </form>
 
-      {allUsers}
+      {userState.allUsers.map((user, i) => (
+        <User user={user} i={i} deleteHandler={deleteHandler} key={i} />
+      ))}
     </div>
   );
 }
